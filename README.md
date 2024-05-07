@@ -10,11 +10,15 @@
 pip install -r requirements.txt
 ```
 
-## 2.スタンプ画像のインストール
+## 2.モデルのインストール
 
-[こちら](https://x.gd/p6b4T "url")からスタンプ画像をダウンロードし、face.pngとして保存してください
+[こちら](https://github.com/opencv/opencv_zoo/blob/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx "url")からモデルをダウンロードしてください。
 
-## 3. Streamlitの起動
+## 3.スタンプ画像のインストール
+
+[こちら](https://x.gd/p6b4T "url")からスタンプ画像をダウンロードし、face.pngとして保存してください。
+
+## 4. Streamlitの起動
 
 Streamlitアプリを起動するには、以下のコマンドを実行してください。
 
@@ -22,7 +26,7 @@ Streamlitアプリを起動するには、以下のコマンドを実行して�
 streamlit run st.py
 ```
 
-## 4. FastAPIの起動
+## 5. FastAPIの起動
 
 FastAPIサーバーを起動するには、以下のコマンドを実行してください。
 
