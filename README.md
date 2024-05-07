@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 ## 2.スタンプ画像のインストール
 
-[url](https://x.gd/p6b4T "こちら")からスタンプ画像をダウンロードし、face.pngとして保存してください
+[こちら](https://x.gd/p6b4T "url")からスタンプ画像をダウンロードし、face.pngとして保存してください
 
 ## 3. Streamlitの起動
 
