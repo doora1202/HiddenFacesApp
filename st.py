@@ -13,7 +13,7 @@ st.set_page_config(
 )
 st.title("Hidden Faces App")
 
-url = os.environ.get("RENDER_URL") or 'http://localhost:8000'
+url = 'https://total-adiana-doora-74d386f3.koyeb.app'
 
 # 画像ファイルのアップロード
 uploaded_file = st.file_uploader("画像ファイルをアップロードしてください", type=["png", "jpg", "jpeg"])
