@@ -13,6 +13,9 @@ st.set_page_config(
 )
 st.title("Hidden Faces App")
 
+with st.sidebar:
+    "[View the source code](https://github.com/doora1202/HiddenFacesApp)"
+
 url = 'https://total-adiana-doora-74d386f3.koyeb.app'
 
 # 画像ファイルのアップロード
@@ -32,7 +35,7 @@ if uploaded_file is not None:
                 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
                 st.image(image, use_column_width=True, caption='Processed Image')
                 image_bytes = io.BytesIO(response.content)
-                st.download_button(label="Download", data=image_bytes, file_name='processed_image.png', mime='image/png')
+                st.download_button(label="Download", data=image_bytes, file_name='processed_image.jpg', mime='image/jpg')
             else:
                 st.error("顔が検出されませんでした。")
         else:
