@@ -51,4 +51,5 @@ typing_extensions==4.12.2
 tzdata==2024.1
 urllib3==2.2.3
 userpath==1.9.1
+uvicorn==0.29.0
 watchdog==4.0.2
