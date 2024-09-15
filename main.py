@@ -9,7 +9,7 @@ app = FastAPI()
 
 # CORSの設定を追加
 origins = [
-    "https://hiddenfacesapp.streamlit.app"
+    "https://hiddenfacesapp.streamlit.app",
     "http://localhost:8501"
 ]
 
@@ -38,20 +38,31 @@ async def process_image(file: UploadFile = File(...)):
         box = list(map(int, face[:4]))
         box_w, box_h = box[2], box[3]
         fore_size = max(box_w, box_h)
-        fore_img = cv2.resize(fore_img, (fore_size, fore_size))
-        alpha_f = fore_img[:, :, 3] / 255.0
+        fore_img_resized = cv2.resize(fore_img, (fore_size, fore_size))
+        alpha_f = fore_img_resized[:, :, 3] / 255.0
         alpha_b = 1.0 - alpha_f
 
         # 合成する領域を指定する
-        x1 = box[0]
-        x2 = x1 + fore_size
-        y1 = box[1]
-        y2 = y1 + fore_size
+        x1 = max(box[0], 0)
+        y1 = max(box[1], 0)
+        x2 = min(x1 + fore_size, back_img.shape[1])  # 元画像の幅を超えないように調整
+        y2 = min(y1 + fore_size, back_img.shape[0])  # 元画像の高さを超えないように調整
+
+        # fore_img_resized の範囲を制限する
+        fore_x1 = 0 if x1 >= 0 else abs(x1)
+        fore_y1 = 0 if y1 >= 0 else abs(y1)
+        fore_x2 = fore_x1 + (x2 - x1)
+        fore_y2 = fore_y1 + (y2 - y1)
+
+        # fore_img_resized の合成範囲を切り取る
+        fore_img_crop = fore_img_resized[fore_y1:fore_y2, fore_x1:fore_x2]
+        alpha_f_crop = alpha_f[fore_y1:fore_y2, fore_x1:fore_x2]
+        alpha_b_crop = alpha_b[fore_y1:fore_y2, fore_x1:fore_x2]
 
         # 合成する
         for c in range(0, 3):
-            back_img[y1:y2, x1:x2, c] = (alpha_f * fore_img[:, :, c] +
-                                         alpha_b * back_img[y1:y2, x1:x2, c])
+            back_img[y1:y2, x1:x2, c] = (alpha_f_crop * fore_img_crop[:, :, c] +
+                                         alpha_b_crop * back_img[y1:y2, x1:x2, c])
     
     if len(faces) == 0:
         return {"message": "顔が検出されませんでした。"}
