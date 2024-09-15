@@ -10,6 +10,7 @@ app = FastAPI()
 # CORSの設定を追加
 origins = [
     "https://hiddenfacesapp.streamlit.app"
+    "http://localhost:8501"
 ]
 
 app.add_middleware(
