@@ -37,7 +37,7 @@ async def process_image(file: UploadFile = File(...)):
     for face in faces:
         box = list(map(int, face[:4]))
         box_w, box_h = box[2], box[3]
-        fore_size = min(box_w, box_h)
+        fore_size = max(box_w, box_h)
         fore_img = cv2.resize(fore_img, (fore_size, fore_size))
         alpha_f = fore_img[:, :, 3] / 255.0
         alpha_b = 1.0 - alpha_f
