@@ -89,10 +89,13 @@ if back_img is not None:
                 for c in range(0, 3):
                     img[y1:y2, x1:x2, c] = (alpha_f_crop * fore_img_crop[:, :, c] +
                                             alpha_b_crop * img[y1:y2, x1:x2, c])
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            _, buffer = cv2.imencode('.jpg', img)
+            # 表示用にBGRからRGBに変換
+            img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            st.image(img_rgb, use_column_width=True, caption='Processed Image')
+
+            # ダウンロード用にBGR形式のままエンコード
+            _, buffer = cv2.imencode('.jpg', img)  # BGRのまま
             buffer_bytes = buffer.tobytes()
-            st.image(img, use_column_width=True, caption='Processed Image')
             st.download_button(label="Download", data=buffer_bytes, file_name='processed_image.jpg', mime='image/jpg')
         else:
             st.error("顔が検出されませんでした。")
