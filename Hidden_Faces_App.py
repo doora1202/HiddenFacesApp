@@ -14,7 +14,7 @@ st.title("Hidden Faces App")
 with st.sidebar:
     "[View the source code](https://github.com/doora1202/HiddenFacesApp)"
 
-url = 'http://127.0.0.1:8000'
+url = 'https://total-adiana-doora-74d386f3.koyeb.app/'
 
 def resize_to_min_500px(image):
     # 元の画像のサイズを取得
