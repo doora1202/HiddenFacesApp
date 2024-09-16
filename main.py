@@ -44,7 +44,6 @@ async def process_image(file: UploadFile = File(...)):
     else:
         # facesをリスト形式に変換
         faces_list = faces.astype(float).tolist()
-        print(f"Faces detected: {faces_list}")
         return JSONResponse(content={"faces": faces_list}, status_code=200)
 
 def read_image(bin_data):
